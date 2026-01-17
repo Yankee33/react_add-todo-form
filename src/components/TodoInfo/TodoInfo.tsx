@@ -1,4 +1,4 @@
-import { Todo } from '../../App';
+import { Todo } from '../../types/types';
 import { UserInfo } from '../UserInfo';
 
 interface Props {
