@@ -4,20 +4,7 @@ import usersFromServer from './api/users';
 import todosFromServer from './api/todos';
 import React, { useState } from 'react';
 import { TodoList } from './components/TodoList';
-
-export interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-}
-export interface Todo {
-  id: number;
-  title: string;
-  userId: number;
-  completed: boolean;
-  user: User;
-}
+import { Todo } from './types/types';
 
 export const App: React.FC = () => {
   const initialTodos: Todo[] = todosFromServer.map(todo => {
@@ -75,15 +62,15 @@ export const App: React.FC = () => {
     <div className="App">
       <h1>Add todo form</h1>
 
-      <form action="/api/todos" method="POST" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="field">
           <input
             type="text"
             data-cy="titleInput"
             placeholder="Enter a title"
             value={title}
-            onChange={even => {
-              setTitle(even.target.value);
+            onChange={changeEvent => {
+              setTitle(changeEvent.target.value);
               if (errors.title) {
                 setErrors(prev => ({ ...prev, title: false }));
               }
